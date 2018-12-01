@@ -1,0 +1,62 @@
+[user]
+  name = Alexander Rouse
+  email = rousepalexander@gmail.com
+[color]
+  ui = auto
+[core]
+  editor = vim
+[alias]
+  d = diff
+  ds = diff --stat
+
+  s = show
+  ss = show --stat
+
+  l = log
+
+  c = commit
+  ca = commit -a
+  cm = commit -m
+  cma = commit -am
+  cnd = commit --amend
+  cand = commit -a --amend
+
+  ch = checkout
+  chb = checkout -b
+
+  b = branch
+  bd = branch -d
+  bdf = branch -D
+
+  f = fetch
+
+  m = merge
+  ma = merge --abort
+
+  p = pull
+
+  r = reset
+  rh = reset --hard
+  popHead = reset HEAD~
+
+  st = status
+
+  sts = stash
+  stsp = stash pop
+  stsd = stash drop
+  stss = stash show
+  stsl = stash list
+  stssp = stash show -p
+
+  cp = cherry-pick
+  cpa = cherry-pick --abort
+  cpc = cherry-pick --continue
+
+  rb = rebase
+  rba = rebase --abort
+  rbc = rebase --continue
+  rbs = rebase --skip
+
+  subi = submodule init
+  subs = submodule sync
+  subur = submodule update --recursive
