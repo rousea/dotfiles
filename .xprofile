@@ -1,0 +1,2 @@
+# set key repeat [delay] [rate]
+xset r rate 300 25

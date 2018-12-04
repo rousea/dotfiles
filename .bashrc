@@ -24,7 +24,7 @@ if [[ $(uname) == "Darwin" ]]; then
   fi
 elif [[ $(uname) == "Linux" ]]; then
   # nothing yet
-  PS1="\[\e[01;35m\]\t \[\e[m\]\\[\e[33m\]\W\[\e[m\] > "
+  PS1="\[\e[01;35m\]\t \[\e[m\]\\[\e[33m\]\W\[\e[m\] $ "
   BROWSER=/usr/bin/chromium
   alias ls='ls --color=auto'
   eval `dircolors ~/.dircolors/dircolors.256dark`
