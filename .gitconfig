@@ -6,41 +6,54 @@
 [core]
   editor = vim
 [alias]
+  # diff
   d = diff
   ds = diff --stat
 
+  # show
   s = show
   ss = show --stat
 
+  # log
   l = log
 
+  # commit
   c = commit
   ca = commit -a
   cm = commit -m
   cma = commit -am
   cnd = commit --amend
   cand = commit -a --amend
+  ccoh = commit -c ORIG_HEAD
 
+  # checkout
   ch = checkout
   chb = checkout -b
 
+  # merge
+  m = merge
+  ma = merge --abort
+
+  # branch
   b = branch
   bd = branch -d
   bdf = branch -D
 
+  # fetch
   f = fetch
 
-  m = merge
-  ma = merge --abort
-
+  # pull
   p = pull
 
-  r = reset
-  rh = reset --hard
+  # reset
+  rs = reset
+  rsh = reset --hard
   popHead = reset HEAD~
 
+  # status
   st = status
 
+  # stash
   sts = stash
   stsp = stash pop
   stsd = stash drop
@@ -48,15 +61,19 @@
   stsl = stash list
   stssp = stash show -p
 
+  # cherry-pick
   cp = cherry-pick
   cpa = cherry-pick --abort
   cpc = cherry-pick --continue
 
+  # rebase
   rb = rebase
   rba = rebase --abort
   rbc = rebase --continue
   rbs = rebase --skip
 
+  # submodule
   subi = submodule init
   subs = submodule sync
   subur = submodule update --recursive
+
