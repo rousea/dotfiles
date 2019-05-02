@@ -234,3 +234,5 @@ exec --no-startup-id "sleep 5s && kalu"
 
 # Mouse movement doesn't change focus
 focus_follows_mouse no
+
+mouse_warping none
