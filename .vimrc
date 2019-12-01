@@ -24,9 +24,33 @@ set hlsearch
 set lazyredraw
 set laststatus=2
 
+" Statusline
+function! GitBranch()
+  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+endfunction
+
+function! StatuslineGit()
+  let l:branchname = GitBranch()
+  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+endfunction
+
+set statusline=
+set statusline+=%#PmenuSel#
+set statusline+=%{StatuslineGit()}
+set statusline+=%#LineNr#
+set statusline+=\ %f
+set statusline+=%m\
+set statusline+=%=
+set statusline+=%#CursorColumn#
+set statusline+=\ %y
+set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+set statusline+=\[%{&fileformat}\]
+set statusline+=\ %p%%
+set statusline+=\ %l:%c
+
 " Coloring
 set background=dark
-colorscheme monokai
+colorscheme seoul256
 set t_Co=256
 
 let g:netrw_altv=1
@@ -64,3 +88,15 @@ noremap <Leader>e :Explore<CR>
 noremap <Leader>he :Hexplore<CR>
 " ! appended to the explore(s) switches the split side
 noremap <Leader>ve :Vexplore!<CR>
+
+" replace all 2 spaces with tabs
+nnoremap <F1> :set tabstop=2 expandtab! <bar> %retab! <CR>
+
+" show spaces and tabs
+nnoremap <F2> :<C-U>setlocal lcs=tab:>-,trail:-,eol:$ list! list? <CR>
+
+" remove trailing whitespace
+:command Rtws %s/\s\+$//e
+
+" don't remove indent on python comment
+au! FileType python setl nosmartindent

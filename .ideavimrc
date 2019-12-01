@@ -1,2 +1,4 @@
 " mute the visual bell
 set visualbell
+set cursorline
+set cursorcolumn

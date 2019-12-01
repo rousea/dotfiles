@@ -1,10 +1,12 @@
 [user]
   name = Alexander Rouse
-  email = rousepalexander@gmail.com
+  email = arouse@republicwireless.com
 [color]
   ui = auto
 [core]
   editor = vim
+[http "https://chipmaster2.qti.qualcomm.com"]
+  followRedirects = true
 [alias]
   # diff
   d = diff

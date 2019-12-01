@@ -11,10 +11,15 @@ PS2='> '
 
 HISTSIZE=10000
 
+export TMUX_VERSION=$(tmux -V | sed -En 's/^tmux ([0-9]+(.[0-9]+)?).*/\1/p')
+
+# TODO fix me to launch in bg and close if failed
+alias scrcpy="scrcpy &>/dev/null &"
+
 if [[ $(uname) == "Darwin" ]]; then
   BROWSER=/Applications/Firefox.app
 
-  PATH=$PATH:$HOME/Library/Android/sdk/platform-tools/
+  PATH=$PATH:/usr/local/sbin/:$HOME/Library/Android/sdk/platform-tools/
 
   alias uart="sudo screen /dev/tty.usbserial 115200"
   alias lock="pmset displaysleepnow"
@@ -24,8 +29,8 @@ if [[ $(uname) == "Darwin" ]]; then
   ssh-add -K > /dev/null 2>&1
   ssh-add -L > /dev/null 2>&1
 
-  if [[ -f utils/adbhelpers.sh ]]; then
-    source utils/adbhelpers.sh
+  if [[ -f $HOME/utils/adbhelpers.sh ]]; then
+    source $HOME/utils/adbhelpers.sh
   fi
 
   export GOPATH=/Users/arouse/workspace/go
