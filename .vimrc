@@ -50,7 +50,7 @@ set statusline+=\ %l:%c
 
 " Coloring
 set background=dark
-colorscheme seoul256
+colorscheme solarized
 set t_Co=256
 
 let g:netrw_altv=1

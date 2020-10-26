@@ -39,12 +39,19 @@ if [[ $(uname) == "Darwin" ]]; then
 
   source $(brew --prefix)/etc/bash_completion.d/git-completion.bash
 elif [[ $(uname) == "Linux" ]]; then
-  # nothing yet
-  PS1="\[\e[01;35m\]\t \[\e[m\]\\[\e[33m\]\W\[\e[m\] $ "
+  source /usr/share/git/completion/git-completion.bash
+  source /usr/share/git/completion/git-prompt.sh
+
+  gitprompt='$(__git_ps1 " (%s)")'
+  PS1="\[\e[01;35m\]\t \[\e[m\]\\[\e[33m\]\W\[\e[m\]$gitprompt $ "
+  unset gitprompt
   BROWSER=/usr/bin/chromium
-  alias ll='ls -lh --color=auto'
-  alias lla='ls -lha --color=auto'
+  alias ll='ls -lh'
+  alias lla='ls -lha'
+  alias ls='ls --color=auto'
   eval `dircolors ~/.dircolors/dircolors.256dark`
+
+  export GOPATH=~/workspace/go
 fi
 
 _git_checkout ()
