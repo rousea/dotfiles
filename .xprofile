@@ -1,2 +1,5 @@
 # set key repeat [delay] [rate]
 xset r rate 200 25
+
+# disble bell
+xset b off

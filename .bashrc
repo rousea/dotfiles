@@ -43,13 +43,13 @@ elif [[ $(uname) == "Linux" ]]; then
   source /usr/share/git/completion/git-prompt.sh
 
   gitprompt='$(__git_ps1 " (%s)")'
-  PS1="\[\e[01;35m\]\t \[\e[m\]\\[\e[33m\]\W\[\e[m\]$gitprompt $ "
+  PS1="\[\e[01;36m\]\t \[\e[m\]\\[\e[33m\]\W\[\e[m\]$gitprompt $ "
   unset gitprompt
   BROWSER=/usr/bin/chromium
   alias ll='ls -lh'
   alias lla='ls -lha'
   alias ls='ls --color=auto'
-  eval `dircolors ~/.dircolors/dircolors.256dark`
+  eval `dircolors ~/.dircolors/dircolors.nord`
 
   export GOPATH=~/workspace/go
 fi
