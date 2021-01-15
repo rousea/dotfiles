@@ -6,20 +6,20 @@
 [[ $- != *i* ]] && return
 
 EDITOR=/usr/bin/vim
-PS1="\[\e[01;35m\]\t \[\e[m\]\\[\e[33m\]\W\[\e[m\] > "
+PS1="\[\e[01;34m\]\t \[\e[m\]\\[\e[32m\]\W\[\e[m\] > "
 PS2='> '
 
 HISTSIZE=10000
 
 export TMUX_VERSION=$(tmux -V | sed -En 's/^tmux ([0-9]+(.[0-9]+)?).*/\1/p')
 
-# TODO fix me to launch in bg and close if failed
-alias scrcpy="scrcpy &>/dev/null &"
+alias scrcpy="(scrcpy &>/dev/null &)"
 
 if [[ $(uname) == "Darwin" ]]; then
   BROWSER=/Applications/Firefox.app
 
   PATH=$PATH:/usr/local/sbin/:$HOME/Library/Android/sdk/platform-tools/
+  PATH=/usr/local/opt/openjdk@11/bin:$PATH
 
   alias uart="sudo screen /dev/tty.usbserial 115200"
   alias lock="pmset displaysleepnow"
