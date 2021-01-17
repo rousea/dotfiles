@@ -1,7 +1,7 @@
 " Code
 syntax enable
 set number
-set showcmd
+"set showcmd
 
 " Spacing / Tabs
 set expandtab
@@ -34,14 +34,15 @@ function! StatuslineGit()
   return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
 endfunction
 
+" this is required for some reason?
+let branchname=StatuslineGit()
+
 set statusline=
-set statusline+=%#PmenuSel#
-set statusline+=%{StatuslineGit()}
-set statusline+=%#LineNr#
+set statusline+=%{branchname}
+set statusline+=%#LineNr# " change highlight group
 set statusline+=\ %f
-set statusline+=%m\
+set statusline+=%m
 set statusline+=%=
-set statusline+=%#CursorColumn#
 set statusline+=\ %y
 set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
 set statusline+=\[%{&fileformat}\]
@@ -50,7 +51,7 @@ set statusline+=\ %l:%c
 
 " Coloring
 set background=dark
-colorscheme solarized
+"colorscheme solarized
 set t_Co=256
 
 let g:netrw_altv=1
@@ -100,3 +101,7 @@ nnoremap <F2> :<C-U>setlocal lcs=tab:>-,trail:-,eol:$ list! list? <CR>
 
 " don't remove indent on python comment
 au! FileType python setl nosmartindent
+
+" stops the focus gained/lost characters inserted?
+set t_fd=
+set t_fe=

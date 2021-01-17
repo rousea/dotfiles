@@ -43,7 +43,7 @@ elif [[ $(uname) == "Linux" ]]; then
   source /usr/share/git/completion/git-prompt.sh
 
   gitprompt='$(__git_ps1 " (%s)")'
-  PS1="\[\e[01;36m\]\t \[\e[m\]\\[\e[33m\]\W\[\e[m\]$gitprompt $ "
+  PS1="\[\e[01;34m\]\t \[\e[m\]\\[\e[32m\]\W\[\e[m\]$gitprompt $ "
   unset gitprompt
   BROWSER=/usr/bin/chromium
   alias ll='ls -lh'
