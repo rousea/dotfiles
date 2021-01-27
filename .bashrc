@@ -15,6 +15,10 @@ export TMUX_VERSION=$(tmux -V | sed -En 's/^tmux ([0-9]+(.[0-9]+)?).*/\1/p')
 
 alias scrcpy="(scrcpy &>/dev/null &)"
 
+if [[ -f /usr/share/bash-completion/bash_completion ]]; then
+  source /usr/share/bash-completion/bash_completion
+fi
+
 if [[ $(uname) == "Darwin" ]]; then
   BROWSER=/Applications/Firefox.app
 
