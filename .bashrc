@@ -46,10 +46,11 @@ elif [[ $(uname) == "Linux" ]]; then
   source /usr/share/git/completion/git-completion.bash
   source /usr/share/git/completion/git-prompt.sh
 
+  PATH=$PATH:$HOME/Android/Sdk/platform-tools/
+
   gitprompt='$(__git_ps1 " (%s)")'
-  PS1="\[\e[01;34m\]\t \[\e[m\]\\[\e[32m\]\W\[\e[m\]$gitprompt $ "
+  PS1="\[\e[00;34m\]\t \[\e[32m\]\W\[\e[00;33m\]$gitprompt \[\e[0m\]$ "
   unset gitprompt
-  BROWSER=/usr/bin/chromium
   alias ll='ls -lh'
   alias lla='ls -lha'
   alias ls='ls --color=auto'
