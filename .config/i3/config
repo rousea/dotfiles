@@ -210,9 +210,9 @@ bindsym $mod+r mode "resize"
 
 # arouse added
 set $bg-color            #2E3440
-set $inactive-bg-color   #3B4252
-set $text-color          #D8DEE9
-set $inactive-text-color #D8DEE9
+set $inactive-bg-color   #2E3440
+set $active-text-color   #D8DEE9
+set $inactive-text-color #A5ABB6
 set $urgent-bg-color     #E5E9F0
 set $indicator-color     #E5E9F0
 
@@ -236,9 +236,9 @@ bar {
                 background $bg-color
                 separator #ECEFF4
                 # type             border             background         text
-                focused_workspace  $bg-color          $bg-color          $text-color
+                focused_workspace  $bg-color          $bg-color          $active-text-color
                 inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-                urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+                urgent_workspace   $urgent-bg-color   $urgent-bg-color   $inactive-text-color
         }
 }
 
