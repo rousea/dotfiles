@@ -9,6 +9,8 @@
 #i3-sensible-terminal
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
+exec --no-startup-id dunst
+
 # Mod1 - alt, Mod4 - win
 set $mod Mod4
 
@@ -42,11 +44,10 @@ default_border none
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id ~/volumeup.sh && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.local/bin/volumeup && $refresh_i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-# arouse added - TODO should I use pactl
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
@@ -69,7 +70,7 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 # arouse modified
-bindsym $mod+d exec --no-startup-id "rofi -combi-modi window,drun,run -show combi -modi combi -theme glue_pro_blue"
+bindsym $mod+d exec --no-startup-id "rofi -m -1 -combi-modi window,drun,run -show combi -modi combi -theme glue_pro_blue"
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec rofi -modi drun,run -show drun
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -177,7 +178,8 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 # arouse removed
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec i3-msg exit
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -187,16 +189,16 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize shrink heigh 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 5 ppt
+        bindsym j resize shrink heigh 10 px or 5 ppt
+        bindsym k resize grow height 10 px or 5 ppt
+        bindsym l resize grow width 10 px or 5 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize shrink height 10 px or 10 ppt
-        bindsym Up resize grow height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width 10 px or 5 ppt
+        bindsym Down resize shrink height 10 px or 5 ppt
+        bindsym Up resize grow height 10 px or 5 ppt
+        bindsym Right resize grow width 10 px or 5 ppt
 
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
@@ -206,10 +208,9 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# TODO change these to black?
 # arouse added
 set $bg-color            #2E3440
-set $inactive-bg-color   #2E3440
+set $inactive-bg-color   #3B4252
 set $text-color          #D8DEE9
 set $inactive-text-color #D8DEE9
 set $urgent-bg-color     #E5E9F0
@@ -226,8 +227,10 @@ client.urgent           $urgent-bg-color   $urgent-bg-color   $text-color       
 # finds out, if available)
 bar {
         status_command i3status
-        font pango:Font Awesome 5 Free, monospcae 9
+        font pango:Font Awesome 5 Free, monospace 9
         separator_symbol "|"
+        position bottom
+        tray_output none
 
         colors {
                 background $bg-color

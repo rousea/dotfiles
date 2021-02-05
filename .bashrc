@@ -13,7 +13,7 @@ HISTSIZE=10000
 
 export TMUX_VERSION=$(tmux -V | sed -En 's/^tmux ([0-9]+(.[0-9]+)?).*/\1/p')
 
-alias scrcpy="(scrcpy &>/dev/null &)"
+alias scrcpy="(scrcpy --shortcut-mod=lctrl &>/dev/null &)"
 
 if [[ -f /usr/share/bash-completion/bash_completion ]]; then
   source /usr/share/bash-completion/bash_completion
@@ -43,10 +43,14 @@ if [[ $(uname) == "Darwin" ]]; then
 
   source $(brew --prefix)/etc/bash_completion.d/git-completion.bash
 elif [[ $(uname) == "Linux" ]]; then
+
   source /usr/share/git/completion/git-completion.bash
   source /usr/share/git/completion/git-prompt.sh
+  source /usr/share/fzf/key-bindings.bash
+  source /usr/share/fzf/completion.bash
 
   PATH=$PATH:$HOME/Android/Sdk/platform-tools/
+  PATH=$HOME/.local/bin:$PATH
 
   gitprompt='$(__git_ps1 " (%s)")'
   PS1="\[\e[00;34m\]\t \[\e[32m\]\W\[\e[00;33m\]$gitprompt \[\e[0m\]$ "

@@ -49,7 +49,7 @@ if __name__ == "__main__":
 
   if sys.argv[1] == "diff":
     diff()
-  elif len(sys.argv) == 2 and sys.argv[1] == "copy":
-    copy(sys.argv[2] == "local")
+  elif len(sys.argv) >= 2 and sys.argv[1] == "copy":
+    copy(len(sys.argv) > 2 and sys.argv[2] == "local")
   else:
     print("usage dotfiles.py [copy|diff]")
