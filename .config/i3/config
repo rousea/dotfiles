@@ -237,7 +237,7 @@ bar {
                 separator #ECEFF4
                 # type             border             background         text
                 focused_workspace  $bg-color          $bg-color          $active-text-color
-                inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+                inactive_workspace $bg-color          $bg-color          $inactive-text-color
                 urgent_workspace   $urgent-bg-color   $urgent-bg-color   $inactive-text-color
         }
 }
