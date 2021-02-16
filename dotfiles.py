@@ -5,8 +5,6 @@ import os
 import sys
 from shutil import copyfile
 
-# TODO: make sure we're not clobbering any files
-
 files = [
   ".bash_profile",
   ".bashrc",
@@ -18,21 +16,23 @@ files = [
   ".config/i3status/config"
 ]
 
-def copy(git_to_local):
-  if git_to_local:
-    danger = input("Are you sure you want to overwrite your local files? ")
-    if danger == "y":
-      for file in files:
-        try:
-          copyfile(file, os.path.expanduser(f"~/{file}"))
-        except FileNotFoundError:
-          pass
-  else:
+def warn(question):
+  danger = input(question)
+  return danger in [ "y", "Y", "yes", "Yes" ]
+
+def something(question, to, fromm):
+  if warn(question):
     for file in files:
       try:
-        copyfile(os.path.expanduser(f"~/{file}"), file)
+        copyfile(to(file), fromm(file))
       except FileNotFoundError:
         pass
+
+def copy(to_git):
+  if to_git:
+    something("Copy from git to home? ", lambda x: x, lambda x: os.path.expanduser(f"~/{x}"))
+  else:
+    something("Copy from home to git? ", lambda x: os.path.expanduser(f"~/{x}"), lambda x: x)
 
 def diff():
   for file in files:
@@ -50,6 +50,6 @@ if __name__ == "__main__":
   if sys.argv[1] == "diff":
     diff()
   elif len(sys.argv) >= 2 and sys.argv[1] == "copy":
-    copy(len(sys.argv) > 2 and sys.argv[2] == "local")
+    copy(len(sys.argv) > 2 and sys.argv[2] == "here")
   else:
     print("usage dotfiles.py [copy|diff]")

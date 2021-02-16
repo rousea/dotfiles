@@ -57,7 +57,7 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86MonBrightnessUp exec xbacklight -inc 5
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5
 
-bindsym ctrl+$mod+l exec --no-startup-id ~/blurlock
+bindsym ctrl+$mod+l exec --no-startup-id ~/.local/bin/blurlock
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
