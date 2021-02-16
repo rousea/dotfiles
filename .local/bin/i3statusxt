@@ -1,0 +1,59 @@
+#!/usr/bin/env python
+
+# extends i3status output to add additional blocks
+
+import sys
+import json
+import subprocess
+
+def add(status, name, full_text, short_text=None, instance=None, color=None):
+  entry = {'full_text' : '%s' % full_text, 'name' : '%s' % name}
+  if short_text:
+    entry['short_text'] = short_text
+  if instance:
+    entry['instance'] = instance
+  if color:
+    entry['color'] = color
+  status.insert(0, entry)
+
+def add_playerctl(status):
+  try:
+    command = ['playerctl', '-s', 'metadata', '--format', '"{{ title }} - {{ artist }} - {{ album }}"']
+    full_text = subprocess.check_output(command).decode('utf-8').strip('\n').strip('"')
+    add(status, 'playerctl', full_text)
+  except subprocess.CalledProcessError:
+    pass
+
+def write_line(line):
+  sys.stdout.write(line + '\n')
+  sys.stdout.flush()
+
+def read_line():
+  try:
+    line = sys.stdin.readline().strip()
+    if not line:
+      sys.exit(1)
+    return line
+  except KeyboardInterrupt:
+    sys.exit()
+
+if __name__ == '__main__':
+  # First line is version info
+  write_line(read_line())
+
+  # Second line starts array
+  write_line(read_line())
+
+  while True:
+    # First entry doesn't have leading comma
+    line, prefix = read_line(), ''
+    # Ignore comma at start of lines
+    if line.startswith(','):
+      line, prefix = line[1:], ','
+
+    entry = json.loads(line)
+
+    # Prepend entries in order
+    add_playerctl(entry)
+
+    write_line(prefix + json.dumps(entry))

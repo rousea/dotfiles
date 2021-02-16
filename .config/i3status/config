@@ -12,6 +12,7 @@ general {
         color_good = "#A3BE8C"
         color_bad = "#BF616A"
         color_degraded = "#EBCB8B"
+        output_format = "i3bar"
 }
 
 #order += "ipv6"
