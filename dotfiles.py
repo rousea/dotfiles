@@ -13,8 +13,8 @@ files = [
   ".tmux.conf",
   ".vimrc",
   ".config/i3/config",
-  ".config/i3status/config"
-  ".config/dunst/dunstrc"
+  ".config/i3status/config",
+  ".config/dunst/dunstrc",
   ".local/bin/i3statusxt"
 ]
 
