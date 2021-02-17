@@ -7,5 +7,7 @@ num=`xrandr | grep " connected" | wc -l`
 if [[ $num -eq 1 ]]; then
   xrandr --auto
 else
-  xrandr --auto --output eDP-1 --left-of DP-2 --output DP-2 --preferred
+  DP1=`xrandr | grep " connected" | sed -n '1 p' | awk '{print $1}'`
+  DP2=`xrandr | grep " connected" | sed -n '2 p' | awk '{print $1}'`
+  xrandr --auto --output $DP1 --left-of $DP2 --output $DP2 --preferred
 fi
