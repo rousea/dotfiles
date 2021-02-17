@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# utility to increase the volume, up to 150%
+# use @DEFUAULT_SINK@ to get id of active sink
+
+MAX=150
+
+SINKID=`pacmd list-sinks | awk '/* index:/{print $3}'`
+CURVOL=`pacmd list-sinks | grep -A 15 "index: $SINKID" | awk '/volume: front-left/{print $5}' | sed 's/\%//'`
+CURVOL=$(( $CURVOL + 5 ))
+if [[ CURVOL -gt $MAX ]]; then
+  CURVOL=$MAX
+fi
+pactl set-sink-volume $SINKID "$CURVOL%"

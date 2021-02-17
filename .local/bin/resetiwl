@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# utility to reset the intel wifi drivers
+# only useful for machines where the hardware is causing issues
+
+modprobe -r iwlmvm iwlwifi
+modprobe iwlmvm iwlwifi
+pkill iwd
+iwctl station wlan0 scan

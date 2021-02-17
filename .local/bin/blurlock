@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# utility to lock the display with a blurred image
+
+BKG=/tmp/background.png
+
+BLUR=true
+
+if [[ "$BLUR" == true ]]; then
+  ffmpeg -f x11grab -y -i $DISPLAY -filter_complex "boxblur=10:1" -vframes 1 $BKG
+else
+  ffmpeg -f x11grab -y -i $DISPLAY -vf "scale=iw/10:ih/10,scale=10*iw:10*ih" -vframes 1 $BKG
+fi
+
+i3lock -t -i $BKG # && echo mem > /sys/power/state

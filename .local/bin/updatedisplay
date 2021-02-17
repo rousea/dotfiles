@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# update X to use 2 available displays
+
+num=`xrandr | grep " connected" | wc -l`
+
+if [[ $num -eq 1 ]]; then
+  xrandr --auto
+else
+  xrandr --auto --output eDP-1 --left-of DP-2 --output DP-2 --preferred
+fi
