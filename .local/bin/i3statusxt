@@ -20,6 +20,7 @@ def add_playerctl(status):
   try:
     command = ['playerctl', '-s', 'metadata', '--format', '"{{ title }} - {{ artist }} - {{ album }}"']
     full_text = subprocess.check_output(command).decode('utf-8').strip('\n').strip('"')
+    short_text = full_text[:full_text.rfind("-") - 1]
     add(status, 'playerctl', full_text)
   except subprocess.CalledProcessError:
     pass

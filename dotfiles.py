@@ -15,6 +15,7 @@ files = [
   ".config/i3/config",
   ".config/i3status/config",
   ".config/dunst/dunstrc",
+  ".config/qmk/qmk.ini",
   ".local/bin/i3statusxt",
   ".local/bin/updatedisplay",
   ".local/bin/blurlock",
