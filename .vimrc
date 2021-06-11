@@ -52,16 +52,30 @@ set statusline+=\ %l:%c
 " Coloring
 set background=dark
 "colorscheme solarized
+colorscheme nord
 set t_Co=256
 
 let g:netrw_altv=1
 
-"call plug#begin('~/.vim/plugged')
-"Plug 'artur-shaik/vim-javacomplete2'
-"call plug#end()
+call plug#begin('~/.vim/plugged')
+Plug 'junegunn/limelight.vim'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+call plug#end()
 
-"autocmd FileType java setlocal omnifunc=javacomplete#Complete
-"
+let g:LanguageClient_serverCommands = {
+      \ 'rust': ['rls'],
+      \ }
+
+nmap <F5> <Plug>(lcn-menu)
+nmap <silent> K <Plug>(lcn-hover)
+nmap <silent> gd <Plug>(lcn-definition)
+
+let g:limelight_conceal_ctermfg = 'gray'
+"autocmd VimEnter * Limelight
+
 noremap <silent> j gj
 noremap <silent> k gk
 
@@ -105,3 +119,14 @@ au! FileType python setl nosmartindent
 " stops the focus gained/lost characters inserted?
 set t_fd=
 set t_fe=
+
+let g:netrw_banner = 0 " No banner
+let g:netrw_liststyle = 3 " Tree style
+let g:netrw_browse_split = 4 " Open in previous window
+let g:netrw_altv = 1 " Right splitting
+let g:netrw_winsize = 15 " Window size
+"augroup ProjectDrawer
+"  autocmd!
+"  autocmd VimEnter * :Vexplore " Open netrw on start
+"  autocmd VimEnter * :wincmd l " move to right window
+"augroup END

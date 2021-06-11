@@ -5,6 +5,7 @@
   ui = auto
 [core]
   editor = vim
+  pager = delta
 [alias]
   # diff
   d = diff
@@ -79,3 +80,11 @@
 
 [pull]
 	ff = only
+
+[format]
+  pretty = fuller
+
+[delta]
+  syntax-theme = DarkNeon
+  line-numbers = true
+  #side-by-side = true

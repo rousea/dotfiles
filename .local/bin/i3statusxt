@@ -18,12 +18,31 @@ def add(status, name, full_text, short_text=None, instance=None, color=None):
 
 def add_playerctl(status):
   try:
-    command = ['playerctl', '-s', 'metadata', '--format', '"{{ title }} - {{ artist }} - {{ album }}"']
+    command = ['playerctl', '-s', 'metadata', '--format', '" {{ title }} - {{ artist }} - {{ album }}"']
+    player_status = subprocess.check_output(['playerctl', '-s', 'status']).decode('utf-8').strip('\n')
+
     full_text = subprocess.check_output(command).decode('utf-8').strip('\n').strip('"')
+
+    if player_status == "Playing":
+        full_text = u'\uf04c ' + full_text
+    else:
+        full_text = u'\uf04b ' + full_text
+
     short_text = full_text[:full_text.rfind("-") - 1]
-    add(status, 'playerctl', full_text)
+    add(status, 'playerctl', full_text, short_text)
   except subprocess.CalledProcessError:
     pass
+
+def add_bluetooth(status):
+  try:
+    command = ['bluetoothctl', 'info']
+    subprocess.check_output(command)
+    # \uf294
+    full_text = ''
+    add(status, 'bluetoothctl', full_text, full_text)
+  except subprocess.CalledProcessError:
+    pass
+
 
 def write_line(line):
   sys.stdout.write(line + '\n')
@@ -53,8 +72,10 @@ if __name__ == '__main__':
       line, prefix = line[1:], ','
 
     entry = json.loads(line)
+    #check_batt(entry)
 
     # Prepend entries in order
     add_playerctl(entry)
+    add_bluetooth(entry)
 
     write_line(prefix + json.dumps(entry))
